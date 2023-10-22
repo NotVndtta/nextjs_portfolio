@@ -5,69 +5,90 @@ import ProjectTag from './ProjectTag'
 const projectsData = [
     {
         id: 1,
-        title: "Title 1",
-        description: "Desc 1",
-        image: "" ,
-        tag: ["",""],
-        gitUrl: "/",
-        previewUrl: "/"
+        title: "ToDo App",
+        description: "Today Tasks",
+        image: "./images/projects/todoApp.jpg" ,
+        tag: ["Front","All"],
+        gitUrl: "https://github.com/NotVndtta/todoApp",
+        previewUrl: "https://notvndtta.github.io/todoApp/"
     },
     {
         id: 2,
-        title: "Title 2",
-        description: "Desc 2",
-        image: "" ,
-        tag: ["",""],
-        gitUrl: "/",
-        previewUrl: "/"
+        title: "Slider",
+        description: "",
+        image: "./images/projects/slider2.jpg" ,
+        tag: ["Front","All"],
+        gitUrl: "https://github.com/NotVndtta/slider",
+        previewUrl: "https://notvndtta.github.io/slider/"
     },
     {
         id: 3,
-        title: "Title 3",
+        title: "CrimeaDigital verstka",
         description: "Desc 3",
-        image: "" ,
-        tag: ["",""],
-        gitUrl: "/",
+        image: "./images/projects/verstka2.jpg" ,
+        tag: ["Front","All"],
+        gitUrl: "https://github.com/NotVndtta/vestkaCrimeaDigital",
         previewUrl: "/"
     },
     {
         id: 4,
-        title: "Title 4",
-        description: "Desc 4",
-        image: "" ,
-        tag: ["",""],
-        gitUrl: "/",
+        title: "Fashion shop",
+        description: "",
+        image: "./images/projects/shop2.jpg" ,
+        tag: ["Front","All"],
+        gitUrl: "https://github.com/NotVndtta/verstka",
         previewUrl: "/"
     },
     {
         id: 5,
-        title: "Title 5",
-        description: "Desc 5",
-        image: "" ,
-        tag: ["",""],
-        gitUrl: "/",
-        previewUrl: "/"
+        title: "Speech converter",
+        description: "",
+        image: "./images/projects/speech_converter.jpg" ,
+        tag: ["Front","All"],
+        gitUrl: "https://github.com/NotVndtta/speech_converter",
+        previewUrl: "https://notvndtta.github.io/speech_converter/"
     },
     {
         id: 6,
-        title: "Title 6",
-        description: "Desc 6",
-        image: "" ,
-        tag: ["",""],
-        gitUrl: "/",
+        title: "Instagram Clon",
+        description: "Only backend on Ruby on Rails",
+        image: "./images/projects/RoR1.jpg" ,
+        tag: ["Back","All"],
+        gitUrl: "https://github.com/NotVndtta/intagram",
         previewUrl: "/"
     },
 ]
 
 const ProjectsSection = () => {
+  const [tag, setTag] = useState("All");
+
+  const handleTagChange = (newTag) => {
+    setTag(newTag);
+  
+  };
+
+  const filteredProjects = projectsData.filter((project) =>
+    project.tag.includes(tag)
+  );
+
   return (
     <>
       <h2 className='text-center text-4xl font-bold text-white mt-4 mb-8 md:mb-12'>My projects</h2>
       <div className='text-white flex flex-row justify-center items-center gap-2 py-6 '>
-        <button className='rounded-full border-2 border-purple-500 px-6 py-3 text-xl cursor-pointer'>All</button>
-        <button className='rounded-full border-2 border-slate-600 hover:border-white px-6 py-3 text-xl cursor-pointer'>Front</button>
+      <ProjectTag onClick={handleTagChange} 
+      name="All" 
+      isSelected={tag === "All"} 
+      />  
+      <ProjectTag onClick={handleTagChange} 
+      name="Front" 
+      isSelected={tag === "Front"} 
+      />
+      <ProjectTag onClick={handleTagChange} 
+      name="Back" 
+      isSelected={tag === "Back"} 
+      />
       </div>
-      <div>{projectsData.map((project)=> (
+      <div>{filteredProjects.map((project)=> (
       <ProjectCard 
       key={project.id} 
       title={project.title} 
